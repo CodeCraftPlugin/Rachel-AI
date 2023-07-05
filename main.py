@@ -44,9 +44,8 @@ def main():
             app_name = result.replace("open ","")
             open(app_name,match_closest=True,output=False) # App will be open be it matches little bit too
 
-
-
+def UI():
+    import tkinter as tk
+    
 if __name__ == "__main__":
      main()
-
-
