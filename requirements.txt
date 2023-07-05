@@ -1,0 +1,6 @@
+appopener==1.7
+characterai==0.6.0
+elevenlabs==0.2.18
+whisper_mic==1.0.1
+wikipedia==1.4.0
+pydantic==1.*
