@@ -3,6 +3,7 @@ from characterai import PyCAI
 from elevenlabs import generate, play,set_api_key
 from AppOpener import open
 import wikipedia
+import os
 def has_common_word(sentence, word_list):
     words = sentence.split()  # Split the sentence into words
     for word in words:
@@ -14,9 +15,9 @@ def main():
     bye = ['bye','Bye','goodbye','Goodbye','exit','Exit','close','Close']
     search = ['search','Search','find','Find','look','Look','google','Google','find me','Find me','look for','Look for']
     open=  ['open','Open','start','Start','launch','Launch','run','Run']
-    client = PyCAI('<Your c.ai auth token>')
+    client = PyCAI(os.getenv('CAI'))
     mic = WhisperMic(model="small.en",device="cpu",)
-    set_api_key("<Your ElevenLabs Api Key")
+    set_api_key(os.getenv('ELEVENLABS-API'))
     run=True
     while run:
         print("listening")
