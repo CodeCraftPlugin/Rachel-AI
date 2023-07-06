@@ -14,9 +14,9 @@ def main():
     bye = ['bye','Bye','goodbye','Goodbye','exit','Exit','close','Close']
     search = ['search','Search','find','Find','look','Look','google','Google','find me','Find me','look for','Look for']
     open=  ['open','Open','start','Start','launch','Launch','run','Run']
-    client = PyCAI('b1612d52b4ccce5bcbb51a2d046891ad07ebce17')
+    client = PyCAI('<Your c.ai auth token>')
     mic = WhisperMic(model="small.en",device="cpu",)
-    set_api_key("9d1cf5037b8994ba6f89343beaf40c92")
+    set_api_key("<Your ElevenLabs Api Key")
     run=True
     while run:
         print("listening")
