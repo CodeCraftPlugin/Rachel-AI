@@ -9,7 +9,7 @@ base = 'console'
 executables = [
     Executable('main.py', base=base, 
                target_name = 'Rachel-Ai.exe',
-               icon="icon.ico"
+               icon="images/icon.ico"
                )
 ]
 
