@@ -1,6 +1,7 @@
 @echo off
 setlocal
 set "build_exe=%~1"
+set justmakeexe = %2
 :build_exe
 python setup.py build
 :setup-ai
@@ -11,6 +12,10 @@ if "%build_exe%"=="true" (
     call :build_exe
     call :setup-ai
     
+)
+if "%justmakeexe%"=="true" (
+    call :build_exe
+    goto :eof
 )
 
 echo Setting up the file...

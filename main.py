@@ -68,4 +68,5 @@ def generate_audio(message):
     return audio
         
 if __name__ == "__main__":
+    generate_audio("Hello greating user Your are using Rachel By CodeCraft Studios")
     main()
