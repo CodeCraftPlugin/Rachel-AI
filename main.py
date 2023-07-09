@@ -1,8 +1,8 @@
 from whisper_mic.whisper_mic import WhisperMic
 from characterai import PyCAI
 from elevenlabs import generate, play,set_api_key
-from AppOpener import open
-import wikipedia
+from AppOpener import open as op
+
 import os
 def has_common_word(sentence, word_list):
     words = sentence.split()  # Split the sentence into words
@@ -27,24 +27,45 @@ def main():
         message = adata['replies'][0]['text']
         name = adata['src_char']['participant']['name']
         print(f"{name}: {message}")
-        audio = generate( 
-            text=message,
-            voice="Rachel",
-            model='eleven_monolingual_v1'
-        )
+        audio = generate_audio(message)
         play(audio)
         if has_common_word(result, bye):
                 run=False
                 break
         elif has_common_word(result, search):
-                result = ' '.join(result)
-                print(result)
-                wikipedia.search(result)
+                result = search_wiki(result, message)
                 break
         if has_common_word(result, open):
             app_name = result.replace("open ","")
-            open(app_name,match_closest=True,output=False) # App will be open be it matches little bit too
+            op(app_name,match_closest=True,output=False) # App will be open be it matches little bit too
             break
+
+def search_wiki(result, message):
+    import wikipedia
+    result = ' '.join(result)
+    print(result)
+    try:
+        search_results = wikipedia.search(result)
+        if search_results:
+            print("Search results:")
+            for wiki_result in search_results:
+                print("- ", wiki_result)
+                audio = generate_audio(message)
+                play(audio)                            
+        else:
+            print("No results found.")
+    except wikipedia.exceptions.WikipediaException as e:
+        print("Error occurred: ", str(e))
+    return result
+
+def generate_audio(message):
+    audio = generate( 
+            text=message,
+            voice="Rachel",
+            model='eleven_monolingual_v1'
+        )
+    
+    return audio
         
 if __name__ == "__main__":
-     main()
+    main()
