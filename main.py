@@ -23,12 +23,12 @@ def main():
         print("listening")
         result = mic.listen()
         print(result)
-        # adata = client.chat.send_message('jIjYwp1Ke8wmsYWFmZsOkqP_5_YqqnPCw-pObjJyRBA', result)
-        # message = adata['replies'][0]['text']
-        # name = adata['src_char']['participant']['name']
-        # print(f"{name}: {message}")
-        # audio = generate_audio(message)
-        # play(audio)
+        adata = client.chat.send_message('jIjYwp1Ke8wmsYWFmZsOkqP_5_YqqnPCw-pObjJyRBA', result)
+        message = adata['replies'][0]['text']
+        name = adata['src_char']['participant']['name']
+        print(f"{name}: {message}")
+        audio = generate_audio(message)
+        play(audio)
         if has_common_word(result, bye):
                 run=False
                 break
