@@ -27,5 +27,5 @@ goto :eof
 :setup-ai
 py -m venv env
 call "env\Scripts\activate.bat"
-pip install -r requirements.txt
+call pip install -r requirements.txt  --index-url https://download.pytorch.org/whl/cu118
 goto :eof

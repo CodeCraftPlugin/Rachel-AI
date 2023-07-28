@@ -16,7 +16,7 @@ def main():
     search = ['search','Search','find','Find','look','Look','google','Google','find me','Find me','look for','Look for']
     open_list=  ['open','Open','start','Start','launch','Launch','run','Run']
     client = PyCAI(os.getenv('CAI'))
-    mic = WhisperMic(model="small.en",device="cpu",)
+    mic = WhisperMic(model="small.en",)
     set_api_key(os.getenv('ELEVENLABS-API'))
     run=True
     while run:
@@ -46,4 +46,5 @@ def generate_audio(message):
 if __name__ == "__main__":
     audio = generate_audio("Hello greating user Your are using Rachel By CodeCraft Studios")
     play(audio)
+    input = input("Please enter the ")
     main()

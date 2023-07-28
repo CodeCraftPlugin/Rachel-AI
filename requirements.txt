@@ -5,3 +5,4 @@ whisper_mic==1.0.1
 wikipedia==1.4.0
 pydantic==1.*
 cx-Freeze==6.15.2
+torch
