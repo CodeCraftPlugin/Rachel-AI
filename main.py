@@ -29,6 +29,7 @@ def main(arg):
         message = adata['replies'][0]['text']
         name = adata['src_char']['participant']['name']
         print(f"{name}: {message}")
+        g.RESPONSE = f"{name}: {message}"
         audio = generate_audio(message)
         play(audio)
         if has_common_word(result, bye):
