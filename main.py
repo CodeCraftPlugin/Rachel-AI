@@ -1,9 +1,12 @@
 from whisper_mic.whisper_mic import WhisperMic
 from characterai import PyCAI
-from elevenlabs import generate, play,set_api_key
+from elevenlabs import generate, play,set_api_key,save
 from AppOpener import open
-
+from pydub.playback import play as pl
+from pydub import AudioSegment
+from threading import Thread
 import os
+import gui as g
 def has_common_word(sentence, word_list):
     words = sentence.split()  # Split the sentence into words
     for word in words:
@@ -11,9 +14,8 @@ def has_common_word(sentence, word_list):
             return True
     return False
 
-def main():
+def main(arg):
     bye = ['bye','Bye','goodbye','Goodbye','exit','Exit','close','Close','Bye!','bye!','bye.','Bye.','goodbye.','Goodbye.','exit.','Exit.','close.','Close']
-    search = ['search','Search','find','Find','look','Look','google','Google','find me','Find me','look for','Look for']
     open_list=  ['open','Open','start','Start','launch','Launch','run','Run']
     client = PyCAI(os.getenv('CAI'))
     mic = WhisperMic(model="small.en",)
@@ -34,6 +36,7 @@ def main():
                 break
         if has_common_word(result, open_list):
             open(result,match_closest=True,output=False) # App will be open be it matches little bit too
+            
 def generate_audio(message):
     audio = generate( 
             text=message,
@@ -44,7 +47,17 @@ def generate_audio(message):
     return audio
         
 if __name__ == "__main__":
-    audio = generate_audio("Hello greating user Your are using Rachel By CodeCraft Studios")
-    play(audio)
-    input = input("Please enter the ")
-    main()
+    greet = "greetings.mp3"
+    if os.path.exists(greet):
+        pl(AudioSegment.from_mp3(greet))
+    else:
+        Gene = generate_audio("Hello, I am your personal assistant...How can I help you?")
+        save(Gene,filename=greet)
+        play(Gene)
+        print("main thread started")
+    main_thread = Thread(target=main,args=(12,))
+    gui_thread = Thread(target=g.gui,args=(12,))
+    gui_thread.start()
+    main_thread.start()
+    g.window.mainloop()
+    
