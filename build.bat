@@ -8,7 +8,7 @@ if "%build_exe%"=="true" (
     call :setup-ai
     goto :eof   
 )
-if "%justmakeexe%"=="true" (
+else if "%justmakeexe%"=="true" (
     call :build_exe
     goto :eof
 )
