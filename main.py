@@ -4,9 +4,7 @@ from elevenlabs import generate, play,set_api_key,save
 from AppOpener import open
 from pydub.playback import play as pl
 from pydub import AudioSegment
-from threading import Thread
 import os
-import gui as g
 def has_common_word(sentence, word_list):
     words = sentence.split()  # Split the sentence into words
     for word in words:
@@ -14,7 +12,7 @@ def has_common_word(sentence, word_list):
             return True
     return False
 
-def main(arg):
+def main():
     bye = ['bye','Bye','goodbye','Goodbye','exit','Exit','close','Close','Bye!','bye!','bye.','Bye.','goodbye.','Goodbye.','exit.','Exit.','close.','Close']
     open_list=  ['open','Open','start','Start','launch','Launch','run','Run']
     client = PyCAI(os.getenv('CAI'))
@@ -29,9 +27,8 @@ def main(arg):
         message = adata['replies'][0]['text']
         name = adata['src_char']['participant']['name']
         print(f"{name}: {message}")
-        g.RESPONSE = f"{name}: {message}"
-        audio = generate_audio(message)
-        play(audio)
+        # audio = generate_audio(message)
+        # play(audio)
         if has_common_word(result, bye):
                 run=False
                 break
@@ -44,7 +41,6 @@ def generate_audio(message):
             voice="Rachel",
             model='eleven_monolingual_v1'
         )
-    
     return audio
         
 if __name__ == "__main__":
@@ -56,9 +52,6 @@ if __name__ == "__main__":
         save(Gene,filename=greet)
         play(Gene)
         print("main thread started")
-    main_thread = Thread(target=main,args=(12,))
-    gui_thread = Thread(target=g.gui,args=(12,))
-    gui_thread.start()
-    main_thread.start()
-    g.window.mainloop()
+
+    main()
     

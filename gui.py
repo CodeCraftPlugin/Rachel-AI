@@ -1,17 +1,15 @@
 from pathlib import Path
-from tkinter import Tk, Canvas, PhotoImage
+from tkinter import Tk, Canvas, PhotoImage, Label
 
 window = Tk(className="Rachel Ai")
-RESPONSE = "RESPONSE:"
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("images")
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
-def gui(arg):
+def gui(args):
     global window
-
     window.geometry("784x650")
     window.configure(bg = "#FFFFFF")
 
@@ -54,16 +52,8 @@ def gui(arg):
     font=("MontserratRoman SemiBold", 64 * -1)
 )
 
-    canvas.create_text(
-        142.0,
-        516.0,
-        anchor="nw",
-        text=RESPONSE,
-        fill="#000000",
-        font=("MontserratRoman SemiBold",16 * -1)
-    )
+    label = Label(window, text=args, font=("MontserratRoman SemiBold", 20))
+    label.place(relx=0.45, rely=0.83,)
     window.resizable(False, False)
 
 
-gui(22)
-window.mainloop()
